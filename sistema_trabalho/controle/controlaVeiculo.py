@@ -24,31 +24,25 @@ class ControlaVeiculo(ControlaAbstract):
     def abre_tela_veiculo(self):
         retun self.__tela_veiculo
 
-    #, placa: str, modelo: str, marca: str, ano: int,  quilometragem_atual: int
     def incluir_veiculo(self):
-        dados_veiculo = self.__tela_veiculo.cadastrar_veiculo(self)
+        dados_veiculo = self.__tela_veiculo.cadastrar_veiculo()
         placa = dados_veiculo[0]
         marca = dados_veiculo[1]
         modelo = dados_veiculo[2]
         ano = dados_veiculo[3]
         quilometragem_atual = dados_veiculo[4]
 
-
-
         if placa in self.__veiculos:
-            pass
+            raise ValueError
         else:
             self.__veiculos[placa] = Veiculo(placa, modelo, marca, ano, quilometragem_atual)
-        if modelo in self.__modelos:
-            pass
-        else:
-            self.__modelos.append(modelo)
-        if marca in self.__marcas:
-            pass
-        else:
-             self.__marcas.append(marca)
+            if not modelo in self.__modelos::
+                self.__modelos.append(modelo)
+            if not marca in self.__marcas:
+                self.__marcas.append(marca)
 
-    def excluir_veiculo(self, placa):
+    def excluir_veiculo(self):
+        placa = self.__tela_veiculo.excluir_veiculo()
         if placa in self.__veiculos:
             del(self.__veiculos[placa])
 
