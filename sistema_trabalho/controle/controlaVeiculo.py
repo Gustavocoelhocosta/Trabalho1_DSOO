@@ -1,5 +1,5 @@
 from controlaAbstract import ControlaAbstract
-from veiculo import Veiculo
+from sistema_trabalho.entidade.veiculo import Veiculo
 
 
 class ControlaVeiculo(ControlaAbstract):
@@ -22,7 +22,9 @@ class ControlaVeiculo(ControlaAbstract):
         return self.__marcas
 
     def abre_tela_veiculo(self):
-        retun self.__tela_veiculo
+        self.__tela_veiculo.listar_opcoes()
+
+
 
     def incluir_veiculo(self):
         dados_veiculo = self.__tela_veiculo.cadastrar_veiculo()
@@ -33,10 +35,10 @@ class ControlaVeiculo(ControlaAbstract):
         quilometragem_atual = dados_veiculo[4]
 
         if placa in self.__veiculos:
-            raise ValueError
+            print('veiculo já cadastrado')
         else:
             self.__veiculos[placa] = Veiculo(placa, modelo, marca, ano, quilometragem_atual)
-            if not modelo in self.__modelos::
+            if not modelo in self.__modelos:
                 self.__modelos.append(modelo)
             if not marca in self.__marcas:
                 self.__marcas.append(marca)
