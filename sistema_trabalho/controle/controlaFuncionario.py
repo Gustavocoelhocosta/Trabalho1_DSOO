@@ -1,12 +1,18 @@
 class ControlaFuncionario():
-    def __init__(self):
+    def __init__(self, sistema):
+        self.__sistema = sistema
         self.__funcionarios = dict()
-        self.__cargos = dict()
-        self.__tela = TelaFuncionario()
 
-    def abre_tela_funcionario(self):
-        pass
+ #       self.__tela = TelaFuncionario
 
-    def incluir_funcionario(self):
-        dados = self.__tela.cadastra
 
+    @property
+    def funcionarios(self):
+        return self.__funcionarios
+
+    # def abre_tela_funcionario(self):
+    #     pass
+    #
+    # def incluir_funcionario(self):
+    #     dados = self.__tela.cadastra
+    #

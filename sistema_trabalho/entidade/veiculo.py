@@ -5,6 +5,15 @@ class Veiculo():
         self.__marca = marca
         self.__ano = ano
         self.__quilometragem_atual = quilometragem_atual
+        self.__emprestado = False
+
+    @property
+    def emprestado(self):
+        return self.__emprestado
+
+    @emprestado.setter
+    def emprestado(self, emprestado):
+        self.__emprestado = emprestado
 
     @property
     def placa(self):

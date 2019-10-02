@@ -7,6 +7,7 @@ class ControlaVeiculo(ControlaAbstract):
     def __init__(self, sistema):
         self.__sistema = sistema
         self.__veiculos = {}
+
         self.__tela_veiculo = TelaVeiculo()
 
     @property
