@@ -1,6 +1,6 @@
-from sistema_trabalho.limite.telaAbstract import TelaAbstract
+import sistema_trabalho.limite.telaAbstract
 
-class TelaEmprestimo(TelaAbstract):
+class TelaEmprestimo(sistema_trabalho.limite.telaAbstract.TelaAbstract):
 
     def listar_opcoes(self):
         opcoes = {0: self.cadastrar_veiculo, 1: self.excluir_veiculo, 2: self.listar_veiculos}
@@ -21,9 +21,13 @@ class TelaEmprestimo(TelaAbstract):
 
 
     def devolver_veiculo(self):
-        pass
+        print('Devolução de veículo')
+        dados = []
+        dados.append(input('digite a placa - '))
+        dados.append(input('digite a quilometragem - '))
+        return dados
 
 
-    def listar_registros(self):
-        pass
+    def listar_registros(self, lista):
+        return print(lista)
 

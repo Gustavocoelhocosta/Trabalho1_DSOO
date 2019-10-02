@@ -4,9 +4,10 @@
 class TelaVeiculo():
     def listar_opcoes(self):
         print('Escolha dentre as opções')
-        print('0 - cadastrar veículo')
+        print('0 - incluir veículo')
         print('1 - excluir veículo')
         print('2 - listar veículos')
+        print('3 - voltar')
         valor = int(input('Digite o numero da opção escolhida - '))
         return valor
 
@@ -25,10 +26,5 @@ class TelaVeiculo():
         placa = input('digite a placa do veículo - ')
         return placa
 
-    def listar_veiculos(self):
-        pass
-
-
-t = TelaVeiculo()
-
-t.listar_opcoes()
+    def listar_veiculos(self, lista):
+        print(lista)

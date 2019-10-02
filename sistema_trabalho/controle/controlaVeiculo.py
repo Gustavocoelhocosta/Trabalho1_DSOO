@@ -1,4 +1,5 @@
-from controlaAbstract import ControlaAbstract
+from sistema_trabalho.controle.controlaAbstract import ControlaAbstract
+from sistema_trabalho.limite.telaVeiculo import TelaVeiculo
 from sistema_trabalho.entidade.veiculo import Veiculo
 
 
@@ -21,10 +22,13 @@ class ControlaVeiculo(ControlaAbstract):
     def marcas(self):
         return self.__marcas
 
+    def voltar(self):
+        return
+
     def abre_tela_veiculo(self):
-        self.__tela_veiculo.listar_opcoes()
-
-
+        opcoes = {0: self.incluir_veiculo, 1: self.excluir_veiculo, 2: self.listar_veiculos, 3: self.voltar}
+        opcao = self.__tela_veiculo.listar_opcoes()
+        return opcoes[opcao]
 
     def incluir_veiculo(self):
         dados_veiculo = self.__tela_veiculo.cadastrar_veiculo()
@@ -42,6 +46,9 @@ class ControlaVeiculo(ControlaAbstract):
                 self.__modelos.append(modelo)
             if not marca in self.__marcas:
                 self.__marcas.append(marca)
+            print('veiculo cadastrado')
+        self.__tela_veiculo.listar_opcoes()
+
 
     def excluir_veiculo(self):
         placa = self.__tela_veiculo.excluir_veiculo()
@@ -49,3 +56,11 @@ class ControlaVeiculo(ControlaAbstract):
             del(self.__veiculos[placa])
 
 
+    def listar_veiculos(self):
+        lista = self.__veiculos
+        self.__tela_veiculo.listar_veiculos(lista)
+
+
+# v = ControlaVeiculo()
+#
+# v.abre_tela_veiculo()
