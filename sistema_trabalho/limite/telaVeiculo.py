@@ -27,4 +27,5 @@ class TelaVeiculo():
         return placa
 
     def listar_veiculos(self, lista):
-        print(lista)
+        for veiculo in lista:
+            print('%s - %s - %s - %d - %d'% (veiculo, lista[veiculo].modelo, lista[veiculo].marca, lista[veiculo].ano, lista[veiculo].quilometragem_atual))

@@ -3,10 +3,11 @@ from sistema_trabalho.entidade.veiculo import Veiculo
 import datetime
 
 class Registro():
-    def __init__(self, veiculo: Veiculo, funcionario: Funcionario):
+    def __init__(self, veiculo: Veiculo, funcionario: Funcionario, motivo: str):
         self.__veiculo = veiculo
         self.__funcionario = funcionario
         self.__data_hora = datetime.datetime.now()
+        self.__motivo = motivo
 
     @property
     def veiculo(self):
@@ -19,3 +20,5 @@ class Registro():
     @property
     def data_hora(self):
         return self.__data_hora
+
+    #get set

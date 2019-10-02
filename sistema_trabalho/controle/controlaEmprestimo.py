@@ -1,5 +1,5 @@
 from sistema_trabalho.controle.controlaAbstract import ControlaAbstract
-from sistema_trabalho.entidade.registro import Registro
+from sistema_trabalho.entidade.Registro import Registro
 from sistema_trabalho.limite.telaEmprestimo import TelaEmprestimo
 
 class ControlaEmprestimo(ControlaAbstract):
