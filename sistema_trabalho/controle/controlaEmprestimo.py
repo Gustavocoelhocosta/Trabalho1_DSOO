@@ -116,9 +116,3 @@ class ControlaEmprestimo(ControlaAbstract):
         else:
             print('Placa inexistente')
             self.abre_tela_emprestimo()
-
-
-
-    #volta pra tela inicial do sistema colocar depois em abstract
-    def voltar(self):
-        self.__sistema.chamar_tela_inicial()
