@@ -31,13 +31,15 @@ class TelaEmprestimo():
         print('1 - por matrícula do funcionario')
         print('2 - por placa do veículo')
         print('3 - todos os registros')
+        print('4 - voltar')
         filtro = int(input('Digite o numero da opção escolhida - '))
         if filtro == 0:
             print('Escolha o motivo')
-            print('4 - Acesso permitido ao veiculo')
-            print('5 - Matrícula não existe')
-            print('6 - Não possui acesso ao veículo')
-            print('7 - veículo indisponível')
+            print('0 - Acesso permitido ao veiculo')
+            print('1 - Matrícula não existe')
+            print('2 - Não possui acesso ao veículo')
+            print('3 - veículo indisponível')
+            print('4 - voltar')
             motivo = int(input('Digite o numero da opção escolhida - '))
             return [0, motivo]
         elif filtro == 1:
@@ -51,9 +53,15 @@ class TelaEmprestimo():
 
     def listar_registros(self, lista):
         for registro in lista:
-            print('%s - %s - %s'% (registro.veiculo.placa, registro.funcionario.nome, registro.motivo))
+            if registro.veiculo == None:
+                if registro.funcionario == None:
+                    print('vazio' + ' - ' + 'vazio' + ' - ' + str(registro.motivo) + ' - ' + str(registro.data_hora))
+                else:
+                    print('vazio' + ' - ' + str(registro.funcionario.nome) + ' - ' + str(registro.motivo) + ' - ' + str(registro.data_hora))
+            else:
+                print(str(registro.veiculo.placa) + ' - ' + str(registro.funcionario.nome) + ' - ' + str(registro.motivo) + ' - ' + str(registro.data_hora))
 
 
     def listar_veiculos(self, lista):
         for veiculo in lista:
-            print('%s - %s - %s - %d - %d'% (veiculo, lista[veiculo].modelo, lista[veiculo].marca, lista[veiculo].ano, lista[veiculo].quilometragem_atual))
+            print('%s - %s - %s - %d - %d'% (lista[veiculo].placa, lista[veiculo].modelo, lista[veiculo].marca, lista[veiculo].ano, lista[veiculo].quilometragem_atual))

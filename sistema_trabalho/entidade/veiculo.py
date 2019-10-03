@@ -35,22 +35,6 @@ class Veiculo():
     def quilometragem_atual(self):
         return self.__quilometragem_atual
 
-    @placa.setter
-    def placa(self, placa):
-        self.__placa = placa
-
-    @modelo.setter
-    def placa(self, modelo):
-        self.__modelo = modelo
-
-    @marca.setter
-    def marca(self, marca):
-        self.__marca = marca
-
-    @ano.setter
-    def ano(self, ano):
-        self.__ano = ano
-
     @quilometragem_atual.setter
     def quilometragem_atual(self, quilometragem_atual):
         self.__quilometragem_atual = quilometragem_atual

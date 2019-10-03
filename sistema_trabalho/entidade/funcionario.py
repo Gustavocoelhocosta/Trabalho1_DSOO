@@ -1,7 +1,7 @@
 
 
 class Funcionario():
-    def __init__(self, matricula: int, nome: str, data_de_nascimento: str, telefone: int, cargo: str):
+    def __init__(self, matricula: int, nome: str, data_de_nascimento: str, telefone: str, cargo: str):
         self.__matricula = matricula
         self.__nome = nome
         self.__data_de_nascimento = data_de_nascimento

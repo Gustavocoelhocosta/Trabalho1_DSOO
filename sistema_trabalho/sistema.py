@@ -33,18 +33,20 @@ class Sistema():
         self.__controla_funcionario.funcionarios[2].veiculos['mmm0002'] = v2
 
         self.__controla_emprestimo = ControlaEmprestimo(self)
-        r0 = Registro(v1,f1,0)
-        r1 = Registro(v2,f1,1)
-        r2 = Registro(v2,f2,2)
-        r3 = Registro(v0,f0,3)
-        r4 = Registro(v0,f3,4)
-        r5 = Registro(v1,f0,0)
-        self.__controla_emprestimo.registros.append(r0)
-        self.__controla_emprestimo.registros.append(r1)
-        self.__controla_emprestimo.registros.append(r2)
-        self.__controla_emprestimo.registros.append(r3)
-        self.__controla_emprestimo.registros.append(r4)
-        self.__controla_emprestimo.registros.append(r5)
+        # r0 = Registro(v1,f1,0)
+        # r1 = Registro(v2,f1,1)
+        # r2 = Registro(v2,f2,2)
+        # r3 = Registro(v0,f0,3)
+        # r4 = Registro(v0,f3,4)
+        # r5 = Registro(v1,f0,0)
+        # self.__controla_emprestimo.registros.append(r0)
+        # self.__controla_emprestimo.registros.append(r1)
+        # self.__controla_emprestimo.registros.append(r2)
+        # self.__controla_emprestimo.registros.append(r3)
+        # self.__controla_emprestimo.registros.append(r4)
+        # self.__controla_emprestimo.registros.append(r5)
+
+#        self.chamar_tela_inicial()
 
     @property
     def controla_veiculo(self):
@@ -75,5 +77,7 @@ class Sistema():
 
 s = Sistema()
 
+
 s.chamar_tela_inicial()
+
 

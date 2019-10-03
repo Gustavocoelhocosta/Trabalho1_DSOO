@@ -3,7 +3,6 @@
 class TelaInicial():
     def __init__(self):
         pass
-
     def listar_opcoes_sistema(self):
         print('Escolha dentre as opções')
         print('0 - cadastro veículos')
