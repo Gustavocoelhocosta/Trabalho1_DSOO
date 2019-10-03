@@ -10,15 +10,21 @@ class Sistema():
     def __init__(self):
         self.__tela_inicial = TelaInicial()
         self.__controla_veiculo = ControlaVeiculo(self)
-        self.__controla_veiculo.veiculos['mmm0000']= Veiculo('mmm0000', 'onix', 'chevrolet', 2000, 15000)
-        self.__controla_veiculo.veiculos['mmm0001'] = Veiculo('mmm0000', 'onix', 'chevrolet', 2000, 15000)
-        self.__controla_veiculo.veiculos['mmm0002'] = Veiculo('mmm0000', 'onix', 'chevrolet', 2000, 15000)
+        v0 = Veiculo('mmm0000', 'onix', 'chevrolet', 2000, 15000)
+        self.__controla_veiculo.veiculos['mmm0000']= v0
+        v1 = Veiculo('mmm0001', 'onix', 'chevrolet', 2000, 15000)
+        self.__controla_veiculo.veiculos['mmm0001'] = v1
+        v2 = Veiculo('mmm0002', 'onix', 'chevrolet', 2000, 15000)
+        self.__controla_veiculo.veiculos['mmm0002'] = v2
         self.__controla_emprestimo = ControlaEmprestimo(self)
         self.__controla_funcionario = ControlaFuncionario(self)
-        self.__controla_funcionario.funcionarios[1] = Funcionario(1, 'João', '07061984', '48988041793', 'Funcionario')
-        self.__controla_funcionario.funcionarios[2] = Funcionario(1, 'Maria', '07061984', '48988041793', 'Diretor')
-        self.__controla_funcionario.funcionarios[3] = Funcionario(1, 'José', '07061984', '48988041793', 'Operador')
-
+        self.__controla_funcionario.funcionarios[0] = Funcionario(0, 'João', '07061984', '48988041793', 'Funcionario')
+        self.__controla_funcionario.funcionarios[1] = Funcionario(1, 'Maria', '07061984', '48988041793', 'Diretor')
+        self.__controla_funcionario.funcionarios[2] = Funcionario(2, 'José', '07061984', '48988041793', 'Operador')
+        self.__controla_funcionario.funcionarios[3] = Funcionario(3, 'joelma', '07061984', '48988041793', 'Operador')
+        self.__controla_funcionario.funcionarios[0].veiculos['mmm0000'] = v0
+        self.__controla_funcionario.funcionarios[0].veiculos['mmm0001'] = v1
+        self.__controla_funcionario.funcionarios[2].veiculos['mmm0002'] = v2
 
     @property
     def controla_veiculo(self):

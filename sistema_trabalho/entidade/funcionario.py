@@ -7,7 +7,11 @@ class Funcionario():
         self.__data_de_nascimento = data_de_nascimento
         self.__telefone = telefone
         self.__cargo = cargo
-        self.__veiculos_permitidos = dict()
+        self.__veiculos = dict()
+
+    @property
+    def veiculos(self):
+        return self.__veiculos
 
     @property
     def matricula(self):

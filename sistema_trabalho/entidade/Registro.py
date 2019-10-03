@@ -21,4 +21,6 @@ class Registro():
     def data_hora(self):
         return self.__data_hora
 
-    #get set
+    @property
+    def motivo(self):
+        return self.__motivo
