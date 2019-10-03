@@ -39,10 +39,10 @@ class ControlaVeiculo(ControlaAbstract):
         quilometragem_atual = dados_veiculo[4]
 
         if placa in self.__veiculos:
-            print('não foi possivel cadastrar pois já existe veículo com essa placa')
+            self.__tela_veiculo.imprimir('não foi possivel cadastrar pois já existe veículo com essa placa')
         else:
             self.__veiculos[placa] = Veiculo(placa, modelo, marca, ano, quilometragem_atual)
-            print('veiculo cadastrado com sucesso')
+            self.__tela_veiculo.imprimir('veiculo cadastrado com sucesso')
         self.abre_tela_veiculo()
 
 
@@ -50,9 +50,9 @@ class ControlaVeiculo(ControlaAbstract):
         placa = self.__tela_veiculo.excluir_veiculo()
         if placa in self.__veiculos:
             del(self.__veiculos[placa])
-            print('veículo excluido com sucesso')
+            self.__tela_veiculo.imprimir('veículo excluido com sucesso')
         else:
-            print('veículo não encontrado')
+            self.__tela_veiculo.imprimir('veículo não encontrado')
         self.abre_tela_veiculo()
 
 

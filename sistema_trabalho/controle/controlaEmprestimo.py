@@ -80,7 +80,7 @@ class ControlaEmprestimo(ControlaAbstract):
     def registrar(self, veiculo, funcionario, motivo):
         registro = Registro(veiculo, funcionario, motivo)
         self.__registros.append(registro)
-        return print(registro.motivo)
+        self.__tela_emprestimo.imprimir(registro.motivo)
 
     #lista os registros por filtros
     def listar_registros(self):

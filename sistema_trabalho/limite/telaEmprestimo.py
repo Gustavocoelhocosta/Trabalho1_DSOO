@@ -1,13 +1,13 @@
-import sistema_trabalho.limite.telaAbstract
+from sistema_trabalho.limite.telaAbstract import TelaAbstract
 
-class TelaEmprestimo():
+class TelaEmprestimo(TelaAbstract):
     def listar_opcoes(self):
         print('Escolha dentre as opções')
         print('0 - retirar veículo')
         print('1 - devolver veículo')
         print('2 - listar registros')
         print('3 - voltar')
-        valor = int(input('Digite o numero da opção escolhida - '))
+        valor = self.validar_inteiro(input('Digite o numero da opção escolhida - '), [0,1,2,3])
         return valor
 
 
@@ -32,7 +32,7 @@ class TelaEmprestimo():
         print('2 - por placa do veículo')
         print('3 - todos os registros')
         print('4 - voltar')
-        filtro = int(input('Digite o numero da opção escolhida - '))
+        filtro = self.validar_inteiro(input('Digite o numero da opção escolhida - '), [0,1,2,3,4])
         if filtro == 0:
             print('Escolha o motivo')
             print('0 - Acesso permitido ao veiculo')
@@ -40,7 +40,7 @@ class TelaEmprestimo():
             print('2 - Não possui acesso ao veículo')
             print('3 - veículo indisponível')
             print('4 - voltar')
-            motivo = int(input('Digite o numero da opção escolhida - '))
+            motivo = self.validar_inteiro(input('Digite o numero da opção escolhida - '), [0,1,2,3,4])
             return [0, motivo]
         elif filtro == 1:
             #listar todos os funcionarios
@@ -62,6 +62,3 @@ class TelaEmprestimo():
                 print(str(registro.veiculo.placa) + ' - ' + str(registro.funcionario.nome) + ' - ' + str(registro.motivo) + ' - ' + str(registro.data_hora))
 
 
-    def listar_veiculos(self, lista):
-        for veiculo in lista:
-            print('%s - %s - %s - %d - %d'% (lista[veiculo].placa, lista[veiculo].modelo, lista[veiculo].marca, lista[veiculo].ano, lista[veiculo].quilometragem_atual))

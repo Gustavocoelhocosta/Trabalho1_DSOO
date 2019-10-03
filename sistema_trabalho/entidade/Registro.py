@@ -25,3 +25,7 @@ class Registro():
     @property
     def motivo(self):
         return self.__motivo
+
+    @property
+    def motivos(self):
+        return self.motivos
