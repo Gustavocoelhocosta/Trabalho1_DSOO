@@ -51,7 +51,7 @@ class ControlaVeiculo(ControlaAbstract):
         placa = self.validar_veiculo(placa)
         del(self.__veiculos[placa])
         self.__tela_veiculo.imprimir('veículo excluido com sucesso')
-
+        self.abre_tela_veiculo()
 
 
     def listar_veiculos(self):
