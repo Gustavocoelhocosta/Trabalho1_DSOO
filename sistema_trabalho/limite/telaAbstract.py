@@ -26,10 +26,6 @@ class TelaAbstract(ABC):
                 except:ValueError
             return valor
 
-
-
-
-
     def inteiro(self, valor):
         try:
             valor = int(valor)
@@ -49,6 +45,8 @@ class TelaAbstract(ABC):
         else:
             while not re.match(pafrao_placa, placa):
                 print('Placa inválida')
-                placa = input().upper()
-            return placa
+                placa = input('digite uma placa válida - ').upper()
+            return self.validar_placa(placa)
 
+    def pedir_placa(self):
+        return (self.validar_placa(input('digite a placa - ')))

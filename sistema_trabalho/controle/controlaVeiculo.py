@@ -47,13 +47,11 @@ class ControlaVeiculo(ControlaAbstract):
 
 
     def excluir_veiculo(self):
-        placa = self.__tela_veiculo.excluir_veiculo()
-        if placa in self.__veiculos:
-            del(self.__veiculos[placa])
-            self.__tela_veiculo.imprimir('veículo excluido com sucesso')
-        else:
-            self.__tela_veiculo.imprimir('veículo não encontrado')
-        self.abre_tela_veiculo()
+        placa = self.__tela_veiculo.pedir_placa()
+        placa = self.validar_veiculo(placa)
+        del(self.__veiculos[placa])
+        self.__tela_veiculo.imprimir('veículo excluido com sucesso')
+
 
 
     def listar_veiculos(self):
@@ -65,3 +63,9 @@ class ControlaVeiculo(ControlaAbstract):
         self.__sistema.chamar_tela_inicial()
 
 
+    def validar_veiculo(self, placa):
+        if placa in self.veiculos:
+            return placa
+        else:
+            print('Veículo não cadastrado')
+            return self.validar_veiculo(self.__tela_veiculo.pedir_placa())

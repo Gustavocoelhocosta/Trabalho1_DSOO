@@ -22,14 +22,14 @@ class Sistema():
         self.__controla_funcionario = ControlaFuncionario(self)
         f0 = Funcionario(0, 'JOÃO', '07061984', '48988041793', 'FUNCIONARIO')
         f1 = Funcionario(1, 'MARIA', '07061984', '48988041793', 'DIRETOR')
-        f2 = Funcionario(2, 'JOSÉ', '07061984', '48988041793', 'DIRETOR')
-        f3 = Funcionario(3, 'JOELMA', '07061984', '48988041793', 'DIRETOR')
+        f2 = Funcionario(2, 'JOSÉ', '07061984', '48988041793', 'OPERADOR')
+        f3 = Funcionario(3, 'JOELMA', '07061984', '48988041793', 'OPERADOR')
         self.__controla_funcionario.funcionarios[0] = f0
         self.__controla_funcionario.funcionarios[1] = f1
         self.__controla_funcionario.funcionarios[2] = f2
         self.__controla_funcionario.funcionarios[3] = f3
-        self.__controla_funcionario.funcionarios[0].veiculos['mmm0000'] = v0
-        self.__controla_funcionario.funcionarios[0].veiculos['CCC2222'] = v1
+        self.__controla_funcionario.funcionarios[0].veiculos['AAA0000'] = v0
+        self.__controla_funcionario.funcionarios[0].veiculos['BBB1111'] = v1
         self.__controla_funcionario.funcionarios[2].veiculos['CCC2222'] = v2
 
         self.__controla_emprestimo = ControlaEmprestimo(self)

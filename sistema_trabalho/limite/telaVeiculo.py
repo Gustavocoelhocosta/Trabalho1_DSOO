@@ -21,10 +21,7 @@ class TelaVeiculo(TelaAbstract):
         dados.append(self.inteiro(input('digite a quilometragem atual - ')))
         return dados
 
-    def excluir_veiculo(self):
-        print('Excluir veículo')
-        placa = input('digite a placa do veículo - ')
-        return placa
+
 
 
 

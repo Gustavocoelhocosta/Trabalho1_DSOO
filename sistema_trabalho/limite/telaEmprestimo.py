@@ -13,18 +13,16 @@ class TelaEmprestimo(TelaAbstract):
 
     def retirar_veiculo(self):
         print('Emprestimo de veículo')
-        return int((input('digite a matricula - ')))
+        return self.pedir_matricula()
 
-    def pedir_placa(self):
-        return (self.validar_placa(input('digite a placa - ')))
 
     def pedir_matricula(self):
-        return (self.inteiro(input('digite a matricula - '))
+        return (self.inteiro(input('digite a matricula - ')))
 
     def devolver_veiculo(self):
         print('Devolução de veículo')
         dados = []
-        dados.append(input('digite a placa - '))
+        dados.append(self.pedir_placa())
         dados.append(self.inteiro(input('digite quilometros rodados - ')))
         return dados
 
