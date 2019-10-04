@@ -16,7 +16,10 @@ class TelaEmprestimo(TelaAbstract):
         return int((input('digite a matricula - ')))
 
     def pedir_placa(self):
-        return (input('digite a placa - '))
+        return (self.validar_placa(input('digite a placa - ')))
+
+    def pedir_matricula(self):
+        return (self.inteiro(input('digite a matricula - '))
 
     def devolver_veiculo(self):
         print('Devolução de veículo')
@@ -47,7 +50,7 @@ class TelaEmprestimo(TelaAbstract):
             return [1, self.inteiro(input('Digite a matrícula - ').upper())]
         elif filtro == 2:
             #listar todas as placas
-            return [2, validar_placa(input('Digite a placa - '))]
+            return [2, self.validar_placa(input('Digite a placa - '))]
         else:
             return [filtro, None]
 

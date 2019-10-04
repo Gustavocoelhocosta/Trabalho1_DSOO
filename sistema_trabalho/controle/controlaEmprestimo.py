@@ -36,12 +36,12 @@ class ControlaEmprestimo(ControlaAbstract):
                 return self.registrar(veiculo, funcionario, 4)
             elif funcionario.cargo == 'DIRETOR' or funcionario.cargo == 'DIRETORA': #verifica se o cargo é de diretor(a)
                 tela.listar_veiculos(veiculos) #lista os veiculos para a escolha
-                placa = tela.pedir_placa()
+                placa = self.validar_veiculo(tela.pedir_placa())
                 veiculo = veiculos[placa]
                 self.verificar_emprestimo(veiculo, funcionario)
             else:
                 if len(funcionario.veiculos) == 0: #testa de o funcionário não tem nenhum veículo com permissão
-                    placa = tela.pedir_placa()
+                    placa = self.validar_veiculo(tela.pedir_placa())
                     veiculo = veiculos[placa]
                     self.registrar(veiculo, funcionario, 2)
                     funcionario.bloqueio += 1
@@ -50,7 +50,7 @@ class ControlaEmprestimo(ControlaAbstract):
                     self.verificar_emprestimo(list(funcionario.veiculos.values())[0],funcionario)
                 else:
                     tela.listar_veiculos(funcionario.veiculos) #lista os veiculos para a escolha
-                    placa = tela.pedir_placa()
+                    placa = self.validar_veiculo(tela.pedir_placa())
                     if placa in funcionario.veiculos:
                         veiculo = veiculos[placa]
                         self.verificar_emprestimo(veiculo,funcionario)
@@ -113,11 +113,19 @@ class ControlaEmprestimo(ControlaAbstract):
                         registros_filtrados.append(registro)
             self.__tela_emprestimo.listar_registros(registros_filtrados)
         self.abre_tela_emprestimo()
+    #
+    # def validar_placa(self, placa):
+    #     veiculos = self.__sistema.controla_veiculo.veiculos
+    #     if placa in veiculos:
+    #         return placa
+    #     else:
+    #         print('Placa inexistente')
+    #         self.abre_tela_emprestimo()
 
-    def validar_placa(self, placa):
-        veiculos = self.__sistema.controla_veiculo.veiculos
-        if placa in veiculos:
+    def validar_veiculo(self, placa):
+        if placa in self.__sistema.controla_veiculo.veiculos:
             return placa
         else:
-            print('Placa inexistente')
-            self.abre_tela_emprestimo()
+            print('veículo não cadastrado')
+            return self.validar_veiculo(self.__tela_emprestimo.pedir_placa())
+

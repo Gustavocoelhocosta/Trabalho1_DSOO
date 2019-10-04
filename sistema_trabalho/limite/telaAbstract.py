@@ -1,4 +1,5 @@
 from abc import ABC, abstractclassmethod
+import re
 
 
 class TelaAbstract(ABC):
@@ -26,6 +27,9 @@ class TelaAbstract(ABC):
             return valor
 
 
+
+
+
     def inteiro(self, valor):
         try:
             valor = int(valor)
@@ -47,3 +51,4 @@ class TelaAbstract(ABC):
                 print('Placa inválida')
                 placa = input().upper()
             return placa
+
