@@ -12,25 +12,25 @@ class Sistema():
         self.__tela_inicial = TelaInicial()
 
         self.__controla_veiculo = ControlaVeiculo(self)
-        v0 = Veiculo('mmm0000', 'onix', 'chevrolet', 2000, 15000)
-        v1 = Veiculo('mmm0001', 'X1', 'BMW', 2000, 15000)
-        v2 = Veiculo('mmm0002', 'K', 'Ford', 2000, 15000)
-        self.__controla_veiculo.veiculos['mmm0001'] = v1
-        self.__controla_veiculo.veiculos['mmm0000'] = v0
-        self.__controla_veiculo.veiculos['mmm0002'] = v2
+        v0 = Veiculo('AAA0000', 'ONIX', 'CHEVROLET', 2000, 15000)
+        v1 = Veiculo('BBB1111', 'X1', 'BMW', 2000, 15000)
+        v2 = Veiculo('CCC2222', 'K', 'FORD', 2000, 15000)
+        self.__controla_veiculo.veiculos['AAA0000'] = v1
+        self.__controla_veiculo.veiculos['BBB1111'] = v0
+        self.__controla_veiculo.veiculos['CCC2222'] = v2
 
         self.__controla_funcionario = ControlaFuncionario(self)
-        f0 = Funcionario(0, 'João', '07061984', '48988041793', 'Funcionario')
-        f1 = Funcionario(1, 'Maria', '07061984', '48988041793', 'Diretor')
-        f2 = Funcionario(2, 'José', '07061984', '48988041793', 'Operador')
-        f3 = Funcionario(3, 'joelma', '07061984', '48988041793', 'Operador')
+        f0 = Funcionario(0, 'JOÃO', '07061984', '48988041793', 'FUNCIONARIO')
+        f1 = Funcionario(1, 'MARIA', '07061984', '48988041793', 'DIRETOR')
+        f2 = Funcionario(2, 'JOSÉ', '07061984', '48988041793', 'DIRETOR')
+        f3 = Funcionario(3, 'JOELMA', '07061984', '48988041793', 'DIRETOR')
         self.__controla_funcionario.funcionarios[0] = f0
         self.__controla_funcionario.funcionarios[1] = f1
         self.__controla_funcionario.funcionarios[2] = f2
         self.__controla_funcionario.funcionarios[3] = f3
         self.__controla_funcionario.funcionarios[0].veiculos['mmm0000'] = v0
-        self.__controla_funcionario.funcionarios[0].veiculos['mmm0001'] = v1
-        self.__controla_funcionario.funcionarios[2].veiculos['mmm0002'] = v2
+        self.__controla_funcionario.funcionarios[0].veiculos['CCC2222'] = v1
+        self.__controla_funcionario.funcionarios[2].veiculos['CCC2222'] = v2
 
         self.__controla_emprestimo = ControlaEmprestimo(self)
         r0 = Registro(v1,f1,0)
@@ -74,15 +74,6 @@ class Sistema():
 
     def chamar_controla_funcionario(self):
         pass
-
-    # def validar_inteiro(self, valor: int, validos: []):
-    #     while not (isinstance(valor, int)) or not valor in validos:
-    #         print('valor incorreto, digite um valor inteiro válido')
-    #         try:
-    #             valor = int(input())
-    #         except:
-    #             ValueError
-    #     return valor
 
 
 

@@ -14,11 +14,11 @@ class TelaVeiculo(TelaAbstract):
     def cadastrar_veiculo(self):
         print('Cadastrar novo veículo')
         dados = []
-        dados.append(input('digite a placa - '))
-        dados.append(input('digite o marca - '))
-        dados.append(input('digite a modelo - '))
-        dados.append(int(input('digite o ano de fabricação - ')))
-        dados.append(int(input('digite a quilometragem atual - ')))
+        dados.append(validar_placa(input('digite a placa - ')))
+        dados.append(input('digite o marca - ').upper())
+        dados.append(input('digite a modelo - ').upper())
+        dados.append(self.inteiro(input('digite o ano de fabricação - ')))
+        dados.append(self.inteiro(input('digite a quilometragem atual - ')))
         return dados
 
     def excluir_veiculo(self):

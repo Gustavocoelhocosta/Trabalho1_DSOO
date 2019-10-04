@@ -8,6 +8,15 @@ class Funcionario():
         self.__telefone = telefone
         self.__cargo = cargo
         self.__veiculos = dict()
+        self.__bloqueio = 0
+
+    @property
+    def bloqueio(self):
+        return self.__bloqueio
+
+    @bloqueio.setter
+    def bloqueio(self, bloqueio):
+        self.__bloqueio = bloqueio
 
     @property
     def veiculos(self):

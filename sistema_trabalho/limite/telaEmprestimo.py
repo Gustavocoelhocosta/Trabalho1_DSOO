@@ -22,7 +22,7 @@ class TelaEmprestimo(TelaAbstract):
         print('Devolução de veículo')
         dados = []
         dados.append(input('digite a placa - '))
-        dados.append(int(input('digite quilometros rodados - ')))
+        dados.append(self.inteiro(input('digite quilometros rodados - ')))
         return dados
 
     def listar_filtro_registro(self):
@@ -44,21 +44,23 @@ class TelaEmprestimo(TelaAbstract):
             return [0, motivo]
         elif filtro == 1:
             #listar todos os funcionarios
-            return [1, int(input('Digite a matrícula - '))]
+            return [1, self.inteiro(input('Digite a matrícula - ').upper())]
         elif filtro == 2:
             #listar todas as placas
-            return [2, input('Digite a placa - ')]
+            return [2, validar_placa(input('Digite a placa - '))]
         else:
             return [filtro, None]
 
     def listar_registros(self, lista):
+        print('PLACA - NOME - MOTIVO - DATA/HORA')
         for registro in lista:
             if registro.veiculo == None:
                 if registro.funcionario == None:
-                    print('vazio' + ' - ' + 'vazio' + ' - ' + str(registro.motivo) + ' - ' + str(registro.data_hora))
+                    print('vazio - vazio' + ' - ' + str(registro.motivo) + ' - ' + str(registro.data_hora))
                 else:
-                    print('vazio' + ' - ' + str(registro.funcionario.nome) + ' - ' + str(registro.motivo) + ' - ' + str(registro.data_hora))
+                    print('vazio - ' + str(registro.funcionario.nome) + ' - ' + str(registro.motivo) + ' - ' + str(registro.data_hora))
             else:
                 print(str(registro.veiculo.placa) + ' - ' + str(registro.funcionario.nome) + ' - ' + str(registro.motivo) + ' - ' + str(registro.data_hora))
 
 
+    

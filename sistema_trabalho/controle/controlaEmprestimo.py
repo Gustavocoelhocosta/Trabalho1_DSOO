@@ -31,7 +31,10 @@ class ControlaEmprestimo(ControlaAbstract):
         tela = self.__tela_emprestimo
         if matricula in funcionarios: #verifica se a matrícula existe
             funcionario = funcionarios[matricula]
-            if funcionario.cargo == 'Diretor': #verifica se o cargo é de diretor
+            if funcionario.bloqueio >= 3: #verifica se funcionário está bloqueado
+                funcionario.bloqueio += 1
+                return self.registrar(veiculo, funcionario, 4)
+            elif funcionario.cargo == 'DIRETOR' or funcionario.cargo == 'DIRETORA': #verifica se o cargo é de diretor(a)
                 tela.listar_veiculos(veiculos) #lista os veiculos para a escolha
                 placa = tela.pedir_placa()
                 veiculo = veiculos[placa]
@@ -41,6 +44,7 @@ class ControlaEmprestimo(ControlaAbstract):
                     placa = tela.pedir_placa()
                     veiculo = veiculos[placa]
                     self.registrar(veiculo, funcionario, 2)
+                    funcionario.bloqueio += 1
                     # fazer 3 tentativas bloquear
                 elif len(funcionario.veiculos) == 1: #testa se o funcionário tem apenas um veículo com permissão
                     self.verificar_emprestimo(list(funcionario.veiculos.values())[0],funcionario)
@@ -53,6 +57,7 @@ class ControlaEmprestimo(ControlaAbstract):
                     else:
                         veiculo = self.__sistema.controla_veiculo.veiculos[placa]
                         self.registrar(veiculo, funcionario, 2)
+                        funcionario.bloqueio += 1
         else:
             self.registrar(None, None, 1)
         self.abre_tela_emprestimo()
