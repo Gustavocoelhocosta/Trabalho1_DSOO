@@ -1,7 +1,7 @@
 from sistema_trabalho.controle.controlaAbstract import ControlaAbstract
 from sistema_trabalho.entidade.registro import Registro
 from sistema_trabalho.limite.telaEmprestimo import TelaEmprestimo
-
+#
 
 class ControlaEmprestimo(ControlaAbstract):
     def __init__(self, sistema):
@@ -24,51 +24,78 @@ class ControlaEmprestimo(ControlaAbstract):
         return opcoes[opcao]()
 
 
+    # def emprestar_veiculo(self): #PRIMEIRA TENTATIVA POLUIDA MAS COM ALGUMAS QUESTÕES
+    #     matricula = self.__tela_emprestimo.retirar_veiculo()
+    #     funcionarios = self.__sistema.controla_funcionario.funcionarios
+    #     veiculos = self.__sistema.controla_veiculo.veiculos
+    #     tela = self.__tela_emprestimo
+    #     if matricula in funcionarios: #verifica se a matrícula existe
+    #         funcionario = funcionarios[matricula]
+    #         if funcionario.bloqueio >= 3: #verifica se funcionário está bloqueado
+    #             funcionario.bloqueio += 1
+    #             self.registrar(None, funcionario, 4)
+    #         elif funcionario.cargo == 'DIRETOR' or funcionario.cargo == 'DIRETORA': #verifica se o cargo é de diretor(a)
+    #             tela.listar_veiculos(veiculos) #lista os veiculos para a escolha
+    #             placa = self.validar_veiculo(tela.pedir_placa())
+    #             veiculo = veiculos[placa]
+    #             self.verificar_emprestimo(veiculo, funcionario)
+    #         else:
+    #             if len(funcionario.veiculos) == 0: #testa de o funcionário não tem nenhum veículo com permissão
+    #                 placa = self.validar_veiculo(tela.pedir_placa())
+    #                 veiculo = veiculos[placa]
+    #                 funcionario.bloqueio += 1
+    #                 if funcionario.bloqueio < 3:
+    #                     self.registrar(veiculo, funcionario, 2)
+    #                 else:
+    #                     self.registrar(veiculo, funcionario, 4)
+    #                 # fazer 3 tentativas bloquear
+    #             elif len(funcionario.veiculos) == 1: #testa se o funcionário tem apenas um veículo com permissão
+    #                 self.verificar_emprestimo(list(funcionario.veiculos.values())[0],funcionario)
+    #             else:
+    #                 tela.listar_veiculos(funcionario.veiculos) #lista os veiculos para a escolha
+    #                 placa = self.validar_veiculo(tela.pedir_placa())
+    #                 if placa in funcionario.veiculos:
+    #                     veiculo = veiculos[placa]
+    #                     self.verificar_emprestimo(veiculo,funcionario)
+    #                 else:
+    #                     veiculo = self.__sistema.controla_veiculo.veiculos[placa]
+    #                     funcionario.bloqueio += 1
+    #                     if funcionario.bloqueio < 3:
+    #                         self.registrar(veiculo, funcionario, 2)
+    #                     else:
+    #                         self.registrar(veiculo, funcionario, 4)
+    #     else:
+    #         self.registrar(None, None, 1)
+    #     self.abre_tela_emprestimo()
+
     def emprestar_veiculo(self):
-        matricula = self.__tela_emprestimo.retirar_veiculo()
+        matricula = self.__tela_emprestimo.pedir_matricula()
         funcionarios = self.__sistema.controla_funcionario.funcionarios
         veiculos = self.__sistema.controla_veiculo.veiculos
         tela = self.__tela_emprestimo
-        if matricula in funcionarios: #verifica se a matrícula existe
-            funcionario = funcionarios[matricula]
-            if funcionario.bloqueio >= 3: #verifica se funcionário está bloqueado
-                funcionario.bloqueio += 1
-                self.registrar(None, funcionario, 4)
-            elif funcionario.cargo == 'DIRETOR' or funcionario.cargo == 'DIRETORA': #verifica se o cargo é de diretor(a)
-                tela.listar_veiculos(veiculos) #lista os veiculos para a escolha
-                placa = self.validar_veiculo(tela.pedir_placa())
-                veiculo = veiculos[placa]
-                self.verificar_emprestimo(veiculo, funcionario)
-            else:
-                if len(funcionario.veiculos) == 0: #testa de o funcionário não tem nenhum veículo com permissão
-                    placa = self.validar_veiculo(tela.pedir_placa())
-                    veiculo = veiculos[placa]
-                    funcionario.bloqueio += 1
-                    if funcionario.bloqueio < 3:
-                        self.registrar(veiculo, funcionario, 2)
-                    else:
-                        self.registrar(veiculo, funcionario, 4)
-                    # fazer 3 tentativas bloquear
-                elif len(funcionario.veiculos) == 1: #testa se o funcionário tem apenas um veículo com permissão
-                    self.verificar_emprestimo(list(funcionario.veiculos.values())[0],funcionario)
-                else:
-                    tela.listar_veiculos(funcionario.veiculos) #lista os veiculos para a escolha
-                    placa = self.validar_veiculo(tela.pedir_placa())
-                    if placa in funcionario.veiculos:
-                        veiculo = veiculos[placa]
-                        self.verificar_emprestimo(veiculo,funcionario)
-                    else:
-                        veiculo = self.__sistema.controla_veiculo.veiculos[placa]
-                        funcionario.bloqueio += 1
-                        if funcionario.bloqueio < 3:
-                            self.registrar(veiculo, funcionario, 2)
-                        else:
-                            self.registrar(veiculo, funcionario, 4)
+        tela.listar_veiculos(veiculos)  # lista os veiculos para a escolha
+        placa = self.__tela_emprestimo.pedir_placa()
+        veiculo = veiculos[placa]
+        if not matricula in funcionarios:
+            self.registrar(veiculo, None, 1)
+            return self.abre_tela_emprestimo()
         else:
-            self.registrar(None, None, 1)
+            funcionario = funcionarios[matricula]
+            if funcionario.cargo == 'DIRETOR' or funcionario.cargo == 'DIRETORA':
+                self.verificar_emprestimo(veiculo, funcionario)
+                return self.abre_tela_emprestimo()
+            elif funcionario.bloqueio > 2:
+                self.registrar(veiculo, funcionario, 4)
+                return self.abre_tela_emprestimo()
+            else:
+                if veiculo in funcionario.veiculos:
+                    self.verificar_emprestimo(veiculo, funcionario)
+                    return self.abre_tela_emprestimo()
+                else:
+                    self.registrar(veiculo, funcionario, 2)
+                    funcionario.bloqueio += 1
+                    return self.abre_tela_emprestimo()
         self.abre_tela_emprestimo()
-
-
 
 
     #verifica se o veículo solicitado está ou não disponível e cria um registro
@@ -103,10 +130,11 @@ class ControlaEmprestimo(ControlaAbstract):
         registros_filtrados = []
         if filtro == 3: #lista todos os registros
             self.__tela_emprestimo.listar_registros(self.__registros)
+            return self.abre_tela_emprestimo()
         elif filtro == 4: #voltar
-            pass
+            return self.abre_tela_emprestimo()
         else:
-            for registro in self.__registros:
+            for registro in self.__registros: #percorre todos os registros
                 if filtro == 1: #filtra por matricula
                     matricula = registro.funcionario.matricula
                     if matricula == parametro:
@@ -132,9 +160,9 @@ class ControlaEmprestimo(ControlaAbstract):
             print('Veículo não cadastrado')
             return self.validar_veiculo(self.__tela_emprestimo.pedir_placa())
 
-    def validar_funcionário(self, matricula):
-        if matricula in self.__sistema.controla_funcionario.funcionarios:
-            return matricula
-        else:
-            print('Funcionário não cadastrado')
-            return self.__tela_emprestimo.pedir_matricula()
+    # def validar_funcionário(self, matricula):
+    #     if matricula in self.__sistema.controla_funcionario.funcionarios:
+    #         return matricula
+    #     else:
+    #         print('Funcionário não cadastrado')
+    #         return self.__tela_emprestimo.pedir_matricula()
