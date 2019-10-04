@@ -81,5 +81,3 @@ s = Sistema()
 
 
 s.chamar_tela_inicial()
-
-
