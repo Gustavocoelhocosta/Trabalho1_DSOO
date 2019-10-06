@@ -32,8 +32,8 @@ class ControlaVeiculo(ControlaAbstract):
     def incluir_veiculo(self):
         dados_veiculo = self.__tela_veiculo.cadastrar_veiculo()
         placa = dados_veiculo[0]
-        marca = dados_veiculo[1]
-        modelo = dados_veiculo[2]
+        modelo = dados_veiculo[1]
+        marca = dados_veiculo[2]
         ano = dados_veiculo[3]
         quilometragem_atual = dados_veiculo[4]
 
