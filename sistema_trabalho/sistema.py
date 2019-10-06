@@ -15,8 +15,8 @@ class Sistema():
         v0 = Veiculo('AAA0000', 'ONIX', 'CHEVROLET', 2000, 15000)
         v1 = Veiculo('BBB1111', 'X1', 'BMW', 2000, 15000)
         v2 = Veiculo('CCC2222', 'K', 'FORD', 2000, 15000)
-        self.__controla_veiculo.veiculos['AAA0000'] = v1
-        self.__controla_veiculo.veiculos['BBB1111'] = v0
+        self.__controla_veiculo.veiculos['AAA0000'] = v0
+        self.__controla_veiculo.veiculos['BBB1111'] = v1
         self.__controla_veiculo.veiculos['CCC2222'] = v2
 
         self.__controla_funcionario = ControlaFuncionario(self)
@@ -71,10 +71,8 @@ class Sistema():
     def chamar_controla_emprestimo(self):
         self.__controla_emprestimo.abre_tela_emprestimo()
 
-
     def chamar_controla_funcionario(self):
-        pass
-
+        self.__controla_funcionario.abre_tela_funcionario()
 
 
 s = Sistema()

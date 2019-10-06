@@ -21,8 +21,8 @@ class ControlaVeiculo(ControlaAbstract):
     def marcas(self):
         return self.__marcas
 
-    def voltar(self):
-        return
+#    def voltar(self):
+#       return
 
     def abre_tela_veiculo(self):
         opcoes = {0: self.incluir_veiculo, 1: self.excluir_veiculo, 2: self.listar_veiculos, 3: self.voltar}

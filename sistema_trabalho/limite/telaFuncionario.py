@@ -7,8 +7,11 @@ class TelaFuncionario(TelaAbstract):
         print('0 - incluir funcionário')
         print('1 - excluir funcionário')
         print('2 - listar funcionários')
-        print('3 - voltar')
-        opcao = self.validar_inteiro(input('Digite o numero da opção escolhida - '), [0,1,2,3])
+        print('3 - cadastrar veículo no funcionário')
+        print('4 - excluir veículo do funcionário')
+        print('5 - listar veículos permitidos')
+        print('6 - voltar')
+        opcao = self.validar_inteiro(input('Digite o numero da opção escolhida - '), [0, 1, 2, 3, 4, 5, 6])
         return opcao
 
     def cadastrar_funcionario(self):
@@ -21,16 +24,11 @@ class TelaFuncionario(TelaAbstract):
         dados.append(input('Digite o cargo: ').upper())
         return dados
 
-    def pedir_matricula(self):
-        return self.inteiro(input('Digite a matrícula: '))
-
     def listar_funcionarios(self, lista):
         print('MATRÍCULA - NOME - DATA NASCIMENTO - TELEFONE - CARGO')
         for funcionario in lista:
-            print('%d - %s - %d - %d - %s'% lista[funcionario].matricula,
-                                            lista[funcionario].nome,
-                                            lista[funcionario].data_de_nascimento,
-                                            lista[funcionario].telefone,
-                                            lista[funcionario].cargo)
-
-
+            print('%d - %s - %s - %s - %s'% (lista[funcionario].matricula,
+                                             lista[funcionario].nome,
+                                             lista[funcionario].data_de_nascimento,
+                                             lista[funcionario].telefone,
+                                             lista[funcionario].cargo))
