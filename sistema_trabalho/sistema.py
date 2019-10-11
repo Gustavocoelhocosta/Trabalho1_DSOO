@@ -66,13 +66,13 @@ class Sistema():
         return opcoes[opcao]()
 
     def chamar_controla_veiculo(self):
-        self.__controla_veiculo.abre_tela_veiculo()
+        self.__controla_veiculo.abrir_tela_veiculo()
 
     def chamar_controla_emprestimo(self):
-        self.__controla_emprestimo.abre_tela_emprestimo()
+        self.__controla_emprestimo.abrir_tela_emprestimo()
 
     def chamar_controla_funcionario(self):
-        self.__controla_funcionario.abre_tela_funcionario()
+        self.__controla_funcionario.abrir_tela_funcionario()
 
 
 s = Sistema()
