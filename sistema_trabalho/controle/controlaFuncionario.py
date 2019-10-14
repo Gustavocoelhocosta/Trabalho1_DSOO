@@ -8,6 +8,7 @@ class ControlaFuncionario():
         self.__funcionarios = dict()
         self.__tela = TelaFuncionario()
 
+    #Retorna o dicionário de funcionários
     @property
     def funcionarios(self):
         return self.__funcionarios
@@ -41,7 +42,7 @@ class ControlaFuncionario():
     def excluir_funcionario(self):
         funcionarios = self.__funcionarios
         for funcionario in funcionarios:
-            print('%s - %s' % (funcionarios[funcionario].matricula, funcionarios[funcionario].nome))
+            self.__tela.imprimir('%s - %s' % (funcionarios[funcionario].matricula, funcionarios[funcionario].nome))
         matricula = self.__tela.pedir_matricula()
         if matricula in self.__funcionarios:
             del (self.__funcionarios[matricula])
