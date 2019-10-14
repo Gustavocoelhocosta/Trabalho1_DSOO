@@ -43,7 +43,7 @@ class ControlaEmprestimo():
                 self.registrar(veiculo, funcionario, 4)
                 return self.abrir_tela_emprestimo()
             else:
-                if veiculo in funcionario.veiculos:
+                if veiculo in funcionario.veiculos.values():
                     self.verificar_emprestimo(veiculo, funcionario)
                     return self.abrir_tela_emprestimo()
                 else:

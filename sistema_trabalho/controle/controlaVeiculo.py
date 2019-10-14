@@ -18,7 +18,7 @@ class ControlaVeiculo():
         return opcoes[opcao]()
 
     def incluir_veiculo(self):
-        dados_vexcluireiculo = self.__tela_veiculo.cadastrar_veiculo()
+        dados_veiculo = self.__tela_veiculo.cadastrar_veiculo()
         placa = dados_veiculo[0]
         modelo = dados_veiculo[1]
         marca = dados_veiculo[2]
