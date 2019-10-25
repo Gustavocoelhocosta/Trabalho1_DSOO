@@ -36,6 +36,7 @@ class TelaAbstract(ABC):
                 try:
                     valor = int(input())
                 except:ValueError
+                return valor
 
     def validar_placa(self, placa):
         pafrao_placa = re.compile('^[A-Z]{3}\d{4}$')
@@ -50,3 +51,6 @@ class TelaAbstract(ABC):
 
     def pedir_placa(self):
         return (self.validar_placa(input('digite a placa - ')))
+
+    def pedir_matricula(self):
+        return self.inteiro(input('Digite a matrícula: '))
