@@ -32,7 +32,7 @@ class ControlaFuncionario():
         telefone = dados_funcionario[3]
         cargo = dados_funcionario[4]
 
-        if matricula in self.__funcionarios:
+        if not self.buscar_funcionario_matricula(matricula):
             self.__tela.imprimir('Não foi possivel cadastrar pois já existe um funcionário com essa matrícula')
         else:
             self.__funcionarios[matricula] = Funcionario(matricula, nome, data_de_nascimento, telefone, cargo)
@@ -112,3 +112,10 @@ class ControlaFuncionario():
 
     def voltar(self):
         self.__sistema.chamar_tela_inicial()
+
+
+    def buscar_funcionario_matricula(self, matricula: int):
+        for funcionario in self.__funcionarios:
+            if funcionario.matricula == matricula:
+                return funcionario
+        return None

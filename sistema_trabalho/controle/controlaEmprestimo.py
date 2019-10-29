@@ -1,6 +1,5 @@
 from sistema_trabalho.entidade.registro import Registro
 from sistema_trabalho.limite.telaEmprestimo import TelaEmprestimo
-#
 
 class ControlaEmprestimo():
     def __init__(self, sistema):
@@ -25,13 +24,13 @@ class ControlaEmprestimo():
     #empresta os veiculos
     def emprestar_veiculo(self):
         matricula = self.__tela_emprestimo.pedir_matricula()
-        funcionarios = self.__sistema.controla_funcionario.funcionarios
+
         veiculos = self.__sistema.controla_veiculo.veiculos
         tela = self.__tela_emprestimo
-        tela.listar_veiculos(veiculos)  # lista os veiculos para a escolha
+        self.__sistema.controla_veiculo.listar_veiculos()
         placa = self.validar_veiculo(self.__tela_emprestimo.pedir_placa())
         veiculo = veiculos[placa]
-        if not matricula in funcionarios:
+        if self.__sistema.controlaFuncionario.buscar_funcionario_matricula(matricula) :
             self.registrar(veiculo, None, 1)
             return self.abrir_tela_emprestimo()
         else:
@@ -99,8 +98,9 @@ class ControlaEmprestimo():
                     if placa == parametro:
                         registros_filtrados.append(registro)
                 else: #filtro por motivo
+                    motivos  =  ['Acesso permitido ao veiculo', 'Matrícula não existe', 'Não possui acesso ao veículo', 'veículo indisponível', 'Acesso Bloqueado']
                     motivo = registro.motivo
-                    if motivo == parametro:
+                    if motivo == motivos[parametro]:
                         registros_filtrados.append(registro)
             self.__tela_emprestimo.listar_registros(registros_filtrados)
         self.abrir_tela_emprestimo()

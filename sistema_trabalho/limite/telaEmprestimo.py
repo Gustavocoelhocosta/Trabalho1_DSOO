@@ -62,6 +62,3 @@ class TelaEmprestimo(TelaAbstract):
                     print('vazio - ' + str(registro.funcionario.nome) + ' - ' + str(registro.motivo) + ' - ' + str(registro.data_hora))
             else:
                 print(str(registro.veiculo.placa) + ' - ' + str(registro.funcionario.nome) + ' - ' + str(registro.motivo) + ' - ' + str(registro.data_hora))
-
-
-    
