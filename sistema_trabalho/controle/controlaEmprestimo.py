@@ -19,37 +19,30 @@ class ControlaEmprestimo():
     def abrir_tela_emprestimo(self):
         opcoes = {0: self.emprestar_veiculo, 1: self.devolver_veiculo, 2: self.listar_registros, 3: self.voltar}
         opcao = self.__tela_emprestimo.listar_opcoes()
-        return opcoes[opcao]()
+        opcoes[opcao]()
+        self.abrir_tela_emprestimo()
 
     #empresta os veiculos
     def emprestar_veiculo(self):
         matricula = self.__tela_emprestimo.pedir_matricula()
-
-        veiculos = self.__sistema.controla_veiculo.veiculos
         tela = self.__tela_emprestimo
         self.__sistema.controla_veiculo.listar_veiculos()
-        placa = self.validar_veiculo(self.__tela_emprestimo.pedir_placa())
-        veiculo = veiculos[placa]
-        if self.__sistema.controlaFuncionario.buscar_funcionario_matricula(matricula) :
-            self.registrar(veiculo, None, 1)
-            return self.abrir_tela_emprestimo()
+        placa = self.__tela_emprestimo.pedir_placa()
+        funcionario = self.__sistema.controlaFuncionario.buscar_funcionario_matricula(matricula)
+        veiculo = self.__sistema.controla_veiculo.buscar_veiculo_placa(placa)
+        if not self.__sistema.controlaFuncionario.buscar_funcionario_matricula(matricula) :
+            return self.registrar(veiculo, funcionario, 1)
         else:
-            funcionario = funcionarios[matricula]
-            if funcionario.cargo == 'DIRETOR' or funcionario.cargo == 'DIRETORA':
-                self.verificar_emprestimo(veiculo, funcionario)
-                return self.abrir_tela_emprestimo()
+            if (funcionario.cargo == 'DIRETOR' or funcionario.cargo == 'DIRETORA') and veiculo.emprestado:
+                return self.registrar(veiculo, funcionario, 0)
             elif funcionario.bloqueio > 2:
-                self.registrar(veiculo, funcionario, 4)
-                return self.abrir_tela_emprestimo()
+                return self.registrar(veiculo, funcionario, 4)
             else:
-                if veiculo in funcionario.veiculos.values():
-                    self.verificar_emprestimo(veiculo, funcionario)
-                    return self.abrir_tela_emprestimo()
+                if veiculo in funcionario.veiculos.values() and veiculo.emprestado:
+                    return self.registrar(veiculo, funcionario, 0)
                 else:
-                    self.registrar(veiculo, funcionario, 2)
                     funcionario.bloqueio += 1
-                    return self.abrir_tela_emprestimo()
-        self.abrir_tela_emprestimo()
+                    return self.registrar(veiculo, funcionario, 2)
 
 
     #verifica se o veículo solicitado está ou não disponível e cria um registro
@@ -68,7 +61,6 @@ class ControlaEmprestimo():
         veiculo = self.__sistema.controla_veiculo.veiculos[placa]
         veiculo.quilometragem_atual += quilometros_rodados
         veiculo.emprestado = False
-        self.abrir_tela_emprestimo()
 
     #cria um registro e armazena na lista registros
     def registrar(self, veiculo, funcionario, motivo):
@@ -103,7 +95,6 @@ class ControlaEmprestimo():
                     if motivo == motivos[parametro]:
                         registros_filtrados.append(registro)
             self.__tela_emprestimo.listar_registros(registros_filtrados)
-        self.abrir_tela_emprestimo()
 
     def voltar(self):
         self.__sistema.chamar_tela_inicial()
