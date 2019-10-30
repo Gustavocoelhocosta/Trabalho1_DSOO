@@ -15,7 +15,8 @@ class ControlaVeiculo():
     def abrir_tela_veiculo(self):
         opcoes = {0: self.incluir_veiculo, 1: self.excluir_veiculo, 2: self.listar_veiculos, 3: self.voltar}
         opcao = self.__tela_veiculo.listar_opcoes()
-        return opcoes[opcao]()
+        opcoes[opcao]()
+        return self.abrir_tela_veiculo()
 
     def incluir_veiculo(self):
         self.__tela_veiculo.imprimir('cadastro de novo veiculo')
@@ -31,7 +32,6 @@ class ControlaVeiculo():
         else:
             self.__veiculos[placa] = Veiculo(placa, modelo, marca, ano, quilometragem_atual)
             self.__tela_veiculo.imprimir('veiculo cadastrado com sucesso')
-        self.abrir_tela_veiculo()
 
     def excluir_veiculo(self):
         placa = self.__tela_veiculo.pedir_placa()
@@ -42,7 +42,6 @@ class ControlaVeiculo():
             if placa in funcionario.veiculos:
                 del(funcionario.veiculos[placa])
         self.__tela_veiculo.imprimir('veículo excluido com sucesso')
-        self.abrir_tela_veiculo()
 
     # def alterar_veiculo(self):
     #     self.__tela_veiculo.imprimir('alterar veículo')
@@ -62,15 +61,14 @@ class ControlaVeiculo():
     def listar_veiculos(self):
         lista = self.__veiculos
         self.__tela_veiculo.listar_veiculos(lista)
-        self.abrir_tela_veiculo()
+
 
 
     def buscar_veiculo_placa(self, placa):
-        for veiculo in self.__veiculos:
-            if placa == veiculo.placa:
-                return veiculo
-            else:
-                return None
+        if placa in self.__veiculos:
+            return self.__veiculos[placa]
+        else:
+            return None
 
     def validar_veiculo(self, placa):
         if placa in self.veiculos:

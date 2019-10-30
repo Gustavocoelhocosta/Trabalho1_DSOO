@@ -8,9 +8,9 @@ class ControlaFuncionario():
         self.__funcionarios = dict()
         self.__tela = TelaFuncionario()
 
-    # @property
-    # def funcionarios(self):
-    #     return self.__funcionarios
+    @property
+    def funcionarios(self):
+        return self.__funcionarios
 
     def abrir_tela_funcionario(self):
         opcoes = {0: self.incluir_funcionario,
@@ -110,11 +110,10 @@ class ControlaFuncionario():
             self.abrir_tela_funcionario()
 
     def buscar_funcionario_matricula(self, matricula):
-        for funcionario in self.__funcionarios:
-            if matricula == funcionario.matricula:
-                return funcionario
-            else:
-                return None
+        if matricula in self.__funcionarios:
+            return self.__funcionarios[matricula]
+        else:
+            return None
 
     def voltar(self):
         self.__sistema.chamar_tela_inicial()
