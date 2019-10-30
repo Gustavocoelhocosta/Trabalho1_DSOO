@@ -11,8 +11,8 @@ class TelaVeiculo(TelaAbstract):
         valor = self.validar_inteiro(input('Digite o numero da opção escolhida - '), [0,1,2,3])
         return valor
 
-    def cadastrar_veiculo(self):
-        print('Cadastrar novo veículo')
+    def pedir_dados_veiculo(self):
+        print('insira os dados do veículo')
         dados = []
         dados.append(self.validar_placa(input('digite a placa - ')))
         dados.append(input('digite o modelo - ').upper())

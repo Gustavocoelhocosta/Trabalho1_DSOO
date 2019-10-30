@@ -8,10 +8,9 @@ class ControlaFuncionario():
         self.__funcionarios = dict()
         self.__tela = TelaFuncionario()
 
-    #Retorna o dicionário de funcionários
-    @property
-    def funcionarios(self):
-        return self.__funcionarios
+    # @property
+    # def funcionarios(self):
+    #     return self.__funcionarios
 
     def abrir_tela_funcionario(self):
         opcoes = {0: self.incluir_funcionario,
@@ -32,7 +31,7 @@ class ControlaFuncionario():
         telefone = dados_funcionario[3]
         cargo = dados_funcionario[4]
 
-        if not self.buscar_funcionario_matricula(matricula):
+        if matricula in self.__funcionarios:
             self.__tela.imprimir('Não foi possivel cadastrar pois já existe um funcionário com essa matrícula')
         else:
             self.__funcionarios[matricula] = Funcionario(matricula, nome, data_de_nascimento, telefone, cargo)
@@ -42,7 +41,7 @@ class ControlaFuncionario():
     def excluir_funcionario(self):
         funcionarios = self.__funcionarios
         for funcionario in funcionarios:
-            self.__tela.imprimir('%s - %s' % (funcionarios[funcionario].matricula, funcionarios[funcionario].nome))
+            print('%s - %s' % (funcionarios[funcionario].matricula, funcionarios[funcionario].nome))
         matricula = self.__tela.pedir_matricula()
         if matricula in self.__funcionarios:
             del (self.__funcionarios[matricula])
@@ -110,12 +109,12 @@ class ControlaFuncionario():
             self.__tela.imprimir('Nenhum vaículo cadastrado para esse funcionário')
             self.abrir_tela_funcionario()
 
+    def buscar_funcionario_matricula(self, matricula):
+        for funcionario in self.__funcionarios:
+            if matricula == funcionario.matricula:
+                return funcionario
+            else:
+                return None
+
     def voltar(self):
         self.__sistema.chamar_tela_inicial()
-
-
-    def buscar_funcionario_matricula(self, matricula: int):
-        for funcionario in self.__funcionarios:
-            if funcionario.matricula == matricula:
-                return funcionario
-        return None

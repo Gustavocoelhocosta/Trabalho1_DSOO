@@ -15,12 +15,11 @@ class ControlaVeiculo():
     def abrir_tela_veiculo(self):
         opcoes = {0: self.incluir_veiculo, 1: self.excluir_veiculo, 2: self.listar_veiculos, 3: self.voltar}
         opcao = self.__tela_veiculo.listar_opcoes()
-        opcoes[opcao]()
-        self.abrir_tela_veiculo()
-
+        return opcoes[opcao]()
 
     def incluir_veiculo(self):
-        dados_veiculo = self.__tela_veiculo.cadastrar_veiculo()
+        self.__tela_veiculo.imprimir('cadastro de novo veiculo')
+        dados_veiculo = self.__tela_veiculo.pedir_dados_veiculo()
         placa = dados_veiculo[0]
         modelo = dados_veiculo[1]
         marca = dados_veiculo[2]
@@ -32,23 +31,46 @@ class ControlaVeiculo():
         else:
             self.__veiculos[placa] = Veiculo(placa, modelo, marca, ano, quilometragem_atual)
             self.__tela_veiculo.imprimir('veiculo cadastrado com sucesso')
+        self.abrir_tela_veiculo()
 
     def excluir_veiculo(self):
         placa = self.__tela_veiculo.pedir_placa()
         placa = self.validar_veiculo(placa)
-        if self.__veiculos[placa].emprestado == False:
-            del(self.__veiculos[placa])
-            funcionarios = self.__sistema.controla_funcionario.funcionarios
-            for funcionario in funcionarios.values():
-                if placa in funcionario.veiculos:
-                    del(funcionario.veiculos[placa])
-            self.__tela_veiculo.imprimir('veículo excluido com sucesso')
-        else:
-            self.__tela_veiculo.imprimir('Veículo não está na garagem')
+        del(self.__veiculos[placa]) #e
+        funcionarios = self.__sistema.controla_funcionario.funcionarios
+        for funcionario in funcionarios.values():
+            if placa in funcionario.veiculos:
+                del(funcionario.veiculos[placa])
+        self.__tela_veiculo.imprimir('veículo excluido com sucesso')
+        self.abrir_tela_veiculo()
+
+    # def alterar_veiculo(self):
+    #     self.__tela_veiculo.imprimir('alterar veículo')
+    #     self.listar_veiculos()
+    #     opcoes = {0: self.incluir_veiculo, 1: self.excluir_veiculo, 2: self.listar_veiculos, 3: self.voltar}
+    #     placa = self.__tela_veiculo.pedir_placa()
+    #     veiculos = self.__veiculos
+    #     placa = self.__tela_veiculo.pedir_placa()
+    #     dados_veiculo = self.__tela_veiculo.self.__tela_veiculo.pedir_dados_veiculo()
+    #     veiculos[dados_veiculo[0]] = veiculos[placa]
+    #     veiculo.placa(dados_veiculo[0])
+    #     5869.(dados_veiculo[1])
+    #     veiculo.marca(dados_veiculo[2])
+    #     veiculo.ano(dados_veiculo[3])
+    #     veiculo.quilometragem_atual(dados_veiculo[4])
 
     def listar_veiculos(self):
         lista = self.__veiculos
         self.__tela_veiculo.listar_veiculos(lista)
+        self.abrir_tela_veiculo()
+
+
+    def buscar_veiculo_placa(self, placa):
+        for veiculo in self.__veiculos:
+            if placa == veiculo.placa:
+                return veiculo
+            else:
+                return None
 
     def validar_veiculo(self, placa):
         if placa in self.veiculos:
@@ -61,8 +83,4 @@ class ControlaVeiculo():
         self.__sistema.chamar_tela_inicial()
 
 
-    def busca_veiculo_placa(self, placa):
-        for veiculo in self.__veiculos:
-            if veiculo.placa == placa:
-                return veiculo
-        return None
+
