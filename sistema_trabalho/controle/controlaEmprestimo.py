@@ -21,6 +21,7 @@ class ControlaEmprestimo():
         opcoes = {0: self.emprestar_veiculo, 1: self.devolver_veiculo, 2: self.listar_registros, 3: self.voltar}
         opcao = self.__tela_emprestimo.listar_opcoes()
         opcoes[opcao]()
+        self.__tela_emprestimo.imprimir('---------------------------------------------------')
         return self.abrir_tela_emprestimo()
 
     #empresta os veiculos

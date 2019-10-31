@@ -16,6 +16,7 @@ class ControlaVeiculo():
         opcoes = {0: self.incluir_veiculo, 1: self.excluir_veiculo, 2: self.listar_veiculos, 3: self.voltar}
         opcao = self.__tela_veiculo.listar_opcoes()
         opcoes[opcao]()
+        self.__tela_veiculo.imprimir('---------------------------------------------------')
         return self.abrir_tela_veiculo()
 
     def incluir_veiculo(self):
@@ -26,7 +27,6 @@ class ControlaVeiculo():
         marca = dados_veiculo[2]
         ano = dados_veiculo[3]
         quilometragem_atual = dados_veiculo[4]
-
         if placa in self.__veiculos:
             self.__tela_veiculo.imprimir('não foi possivel cadastrar pois já existe veículo com essa placa')
         else:
@@ -34,48 +34,36 @@ class ControlaVeiculo():
             self.__tela_veiculo.imprimir('veiculo cadastrado com sucesso')
 
     def excluir_veiculo(self):
+        self.listar_veiculos()
         placa = self.__tela_veiculo.pedir_placa()
-        placa = self.validar_veiculo(placa)
-        del(self.__veiculos[placa]) #e
-        funcionarios = self.__sistema.controla_funcionario.funcionarios
-        for funcionario in funcionarios.values():
-            if placa in funcionario.veiculos:
-                del(funcionario.veiculos[placa])
-        self.__tela_veiculo.imprimir('veículo excluido com sucesso')
+        if self.buscar_veiculo_placa(placa):
+            veiculo = self.buscar_veiculo_placa(placa)
+            if veiculo.emprestado:
+                self.__tela_veiculo.imprimir('veículo fora da garagem')
+            else:
+                del self.veiculos[placa]
+                self.__sistema.controla_funcionario.excluir_veiculo_funcionarios(placa)
+                self.__tela_veiculo.imprimir('veículo excluido com sucesso')
+        else:
+            self.__tela_veiculo.imprimir('veículo inexistente')
 
-    # def alterar_veiculo(self):
-    #     self.__tela_veiculo.imprimir('alterar veículo')
-    #     self.listar_veiculos()
-    #     opcoes = {0: self.incluir_veiculo, 1: self.excluir_veiculo, 2: self.listar_veiculos, 3: self.voltar}
-    #     placa = self.__tela_veiculo.pedir_placa()
-    #     veiculos = self.__veiculos
-    #     placa = self.__tela_veiculo.pedir_placa()
-    #     dados_veiculo = self.__tela_veiculo.self.__tela_veiculo.pedir_dados_veiculo()
-    #     veiculos[dados_veiculo[0]] = veiculos[placa]
-    #     veiculo.placa(dados_veiculo[0])
-    #     5869.(dados_veiculo[1])
-    #     veiculo.marca(dados_veiculo[2])
-    #     veiculo.ano(dados_veiculo[3])
-    #     veiculo.quilometragem_atual(dados_veiculo[4])
+        # placa = self.validar_veiculo(placa)
+        # del(self.__veiculos[placa]) #e
+        # funcionarios = self.__sistema.controla_funcionario.funcionarios
+        # for funcionario in funcionarios.values():
+        #     if placa in funcionario.veiculos:
+        #         del(funcionario.veiculos[placa])
+        # self.__tela_veiculo.imprimir('veículo excluido com sucesso')
 
     def listar_veiculos(self):
         lista = self.__veiculos
         self.__tela_veiculo.listar_veiculos(lista)
-
-
 
     def buscar_veiculo_placa(self, placa):
         if placa in self.__veiculos:
             return self.__veiculos[placa]
         else:
             return None
-
-    def validar_veiculo(self, placa):
-        if placa in self.veiculos:
-            return placa
-        else:
-            print('Veículo não cadastrado')
-            return self.validar_veiculo(self.__tela_veiculo.pedir_placa())
 
     def voltar(self):
         self.__sistema.chamar_tela_inicial()

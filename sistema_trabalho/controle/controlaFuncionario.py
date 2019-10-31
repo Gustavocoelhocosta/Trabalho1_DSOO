@@ -72,6 +72,15 @@ class ControlaFuncionario():
         self.__tela.imprimir('Veículo cadastrado com sucesso')
         self.abrir_tela_funcionario()
 
+
+
+    def excluir_veiculo_funcionarios(self, placa):
+        for funcionario in self.__funcionarios.values():
+            if placa in funcionario.veiculos:
+                del funcionario.veiculos[placa]
+
+
+
     def excluir_veiculo_do_funcionario(self):
         self.__tela.imprimir('Excluíndo veículo da lista do funcionário')
         funcionarios = self.__funcionarios
