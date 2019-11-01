@@ -1,8 +1,9 @@
 from sistema_trabalho.entidade.registro import Registro
 from sistema_trabalho.limite.telaEmprestimo import TelaEmprestimo
+from sistema_trabalho.controle.controlaAbstract import ControlaAbstract
 #
 
-class ControlaEmprestimo():
+class ControlaEmprestimo(ControlaAbstract):
     def __init__(self, sistema):
         self.__sistema = sistema
         self.__registros = []
@@ -16,18 +17,26 @@ class ControlaEmprestimo():
     def tela_emprestimo(self):
         return self.__tela_emprestimo
 
+    def incluir(self):
+        pass
+
+    def excluir(self):
+        pass
+
+
     #abre a tela inicial de emprestimo
-    def abrir_tela_emprestimo(self):
-        opcoes = {0: self.emprestar_veiculo, 1: self.devolver_veiculo, 2: self.listar_registros, 3: self.voltar}
+    def abrir_tela(self):
+        self.__tela_emprestimo.imprimir('----------------------------------------------------')
+        opcoes = {0: self.emprestar_veiculo, 1: self.devolver_veiculo, 2: self.listar, 3: self.voltar}
         opcao = self.__tela_emprestimo.listar_opcoes()
         opcoes[opcao]()
-        self.__tela_emprestimo.imprimir('---------------------------------------------------')
-        return self.abrir_tela_emprestimo()
+        return self.abrir_tela()
 
     #empresta os veiculos
     def emprestar_veiculo(self):
+        self.__sistema.controla_funcionario.listar()
         matricula = self.__tela_emprestimo.pedir_matricula()
-        self.__sistema.controla_veiculo.listar_veiculos()
+        self.__sistema.controla_veiculo.listar()
         placa = self.__tela_emprestimo.pedir_placa()
         tela = self.__tela_emprestimo
         if self.__sistema.controla_veiculo.buscar_veiculo_placa(placa):
@@ -60,7 +69,7 @@ class ControlaEmprestimo():
         veiculo = self.__sistema.controla_veiculo.veiculos[placa]
         veiculo.quilometragem_atual += quilometros_rodados
         veiculo.emprestado = False
-        self.abrir_tela_emprestimo()
+        self.abrir_tela()
 
     #cria um registro e armazena na lista registros
     def registrar(self, veiculo, funcionario, motivo):
@@ -69,16 +78,15 @@ class ControlaEmprestimo():
         self.__tela_emprestimo.imprimir(registro.motivo)
 
     #lista os registros por filtros
-    def listar_registros(self):
+    def listar(self):
         dados = self.__tela_emprestimo.listar_filtro_registro()
         filtro = dados[0]
         parametro = dados[1]
         registros_filtrados = []
         if filtro == 3: #lista todos os registros
-            self.__tela_emprestimo.listar_registros(self.__registros)
-            return self.abrir_tela_emprestimo()
+            return self.__tela_emprestimo.listar_registros(self.__registros)
         elif filtro == 4: #voltar
-            return self.abrir_tela_emprestimo()
+            return None
         else:
             for registro in self.__registros: #percorre todos os registros
                 if filtro == 1: #filtra por matricula
@@ -94,7 +102,6 @@ class ControlaEmprestimo():
                     if registro.motivo == motivos[parametro]:
                         registros_filtrados.append(registro)
             self.__tela_emprestimo.listar_registros(registros_filtrados)
-        self.abrir_tela_emprestimo()
 
     def voltar(self):
         self.__sistema.chamar_tela_inicial()

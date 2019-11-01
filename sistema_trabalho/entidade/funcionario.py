@@ -61,3 +61,7 @@ class Funcionario():
     @cargo.setter
     def cargo(self, cargo):
         self.__cargo = cargo
+
+    def excluir_veiculo(self, placa):
+        if placa in self.__veiculos:
+            del self.__veiculos[placa]

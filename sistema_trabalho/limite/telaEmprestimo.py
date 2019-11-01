@@ -7,8 +7,7 @@ class TelaEmprestimo(TelaAbstract):
         print('1 - devolver veículo')
         print('2 - listar registros')
         print('3 - voltar')
-        valor = self.validar_inteiro(input('Digite o numero da opção escolhida - '), [0,1,2,3])
-        return valor
+        return self.pedir_inteiro_valido('digite uma opção ', [0,1,2,3], 'não é uma opção válida')
 
 
     def retirar_veiculo(self):
@@ -17,23 +16,25 @@ class TelaEmprestimo(TelaAbstract):
 
 
     def pedir_matricula(self):
-        return (self.inteiro(input('digite a matricula - ')))
+        return self.pedir_inteiro_valido('digite a matricula - ')
 
     def devolver_veiculo(self):
         print('Devolução de veículo')
         dados = []
         dados.append(self.pedir_placa())
-        dados.append(self.inteiro(input('digite quilometros rodados - ')))
+        dados.append(self.pedir_inteiro_valido('digite quilometros rodados - '))
         return dados
 
     def listar_filtro_registro(self):
+        print('----------------------------------------------------')
         print('Escolha o filtro do registro')
         print('0 - por motivo/permissão')
         print('1 - por matrícula do funcionario')
         print('2 - por placa do veículo')
         print('3 - todos os registros')
         print('4 - voltar')
-        filtro = self.validar_inteiro(input('Digite o numero da opção escolhida - '), [0,1,2,3,4])
+        filtro = self.pedir_inteiro_valido('digite uma opção ', [0,1,2,3,4], 'não é uma opção válida')
+        print('----------------------------------------------------')
         if filtro == 0:
             print('Escolha o motivo')
             print('0 - Acesso permitido ao veiculo')
@@ -41,14 +42,14 @@ class TelaEmprestimo(TelaAbstract):
             print('2 - Não possui acesso ao veículo')
             print('3 - veículo indisponível')
             print('4 - voltar')
-            motivo = self.validar_inteiro(input('Digite o numero da opção escolhida - '), [0,1,2,3,4])
+            motivo = self.pedir_inteiro_valido('digite uma opção ', [0,1,2,3,4], 'não é uma opção válida')
             return [0, motivo]
         elif filtro == 1:
             #listar todos os funcionarios
-            return [1, self.inteiro(input('Digite a matrícula - ').upper())]
+            return [1, self.pedir_matricula()]
         elif filtro == 2:
             #listar todas as placas
-            return [2, self.validar_placa(input('Digite a placa - '))]
+            return [2, self.pedir_placa()]
         else:
             return [filtro, None]
 

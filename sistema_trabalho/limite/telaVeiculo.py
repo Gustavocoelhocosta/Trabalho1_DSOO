@@ -8,17 +8,16 @@ class TelaVeiculo(TelaAbstract):
         print('1 - excluir veículo')
         print('2 - listar veículos')
         print('3 - voltar')
-        valor = self.validar_inteiro(input('Digite o numero da opção escolhida - '), [0,1,2,3])
-        return valor
+        return self.pedir_inteiro_valido('digite uma opção ', [0,1,2,3], 'não é uma opção válida')
 
     def pedir_dados_veiculo(self):
         print('insira os dados do veículo')
         dados = []
-        dados.append(self.validar_placa(input('digite a placa - ')))
+        dados.append(self.pedir_placa())
         dados.append(input('digite o modelo - ').upper())
         dados.append(input('digite a marca - ').upper())
-        dados.append(self.inteiro(input('digite o ano de fabricação - ')))
-        dados.append(self.inteiro(input('digite a quilometragem atual - ')))
+        dados.append(self.pedir_inteiro_valido('digite o ano de fabricação - '))
+        dados.append(self.pedir_inteiro_valido('digite a quilometragem atual - '))
         return dados
 
 

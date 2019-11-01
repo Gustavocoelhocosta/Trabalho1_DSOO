@@ -47,6 +47,10 @@ class Sistema():
         self.__controla_emprestimo.registros.append(r5)
 
     @property
+    def tela_inicial(self):
+        return self.__tela_inicial
+
+    @property
     def controla_veiculo(self):
         return self.__controla_veiculo
 
@@ -64,18 +68,16 @@ class Sistema():
         return opcoes[opcao]()
 
     def chamar_controla_veiculo(self):
-        self.__controla_veiculo.abrir_tela_veiculo()
+        self.__controla_veiculo.abrir_tela()
 
     def chamar_controla_emprestimo(self):
-        self.__controla_emprestimo.abrir_tela_emprestimo()
+        self.__controla_emprestimo.abrir_tela()
 
     def chamar_controla_funcionario(self):
-        self.__controla_funcionario.abrir_tela_funcionario()
+        self.__controla_funcionario.abrir_tela()
 
 
 s = Sistema()
-
-
 s.chamar_tela_inicial()
 
 
